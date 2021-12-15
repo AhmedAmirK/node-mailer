@@ -4,10 +4,14 @@
   "description": "Use app api to send emails",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "Ahmed Amir Khalaf",
   "license": "ISC",
+  "engines": {
+    "node": "17.2.0"
+  },
   "dependencies": {
     "body-parser": "^1.19.1",
     "express": "^4.17.1",
