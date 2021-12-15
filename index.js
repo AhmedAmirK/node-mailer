@@ -10,9 +10,13 @@ app.use(bodyParser.urlencoded({ extended: false}));
 
 app.use(bodyParser.json());
 
-app.post('/send-mail', (req,res)=>{
+app.post('/send-mail', async (req,res)=>{
     
-    const {to_email, subject, body} = req.body;
+    const {to_email, subject, text, html} = req.body;
+    if(!to_email || !subject || !(text || html) ){
+        res.status(401).send('Must Send to_email, subject and text in your request body');
+        return;
+    }
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -26,9 +30,10 @@ app.post('/send-mail', (req,res)=>{
     
     const msg = {
         from: '"Excellent UAE Website" <website@excellentuae.net>', // sender address
-        to: 'ahmedkhalaf24@gmail.com',//`${to_email}`, // list of receivers
-        subject: 'Test mail server', //`${subject}`, // Subject line
-        text: 'Saba7o'//`${body}`, // plain text body
+        to: `${to_email}`, // list of receivers
+        subject: `${subject}`, // Subject line
+        text: `${text}`, // plain text body
+        html: `${html}`
     }
     // send mail with defined transport object
     const info = await transporter.sendMail(msg);
@@ -36,7 +41,7 @@ app.post('/send-mail', (req,res)=>{
     console.log("Message sent: %s", info.messageId);
     // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
     
-    res.send('Email Sent!')
+    res.send('Email Sent!');
 });
 
 app.listen(port, ()=> console.log(`App listening on http://localhost:${port}`))
