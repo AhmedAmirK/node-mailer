@@ -1,0 +1,16 @@
+{
+  "name": "node-emailer",
+  "version": "1.0.0",
+  "description": "Use app api to send emails",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ahmed Amir Khalaf",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.1",
+    "express": "^4.17.1",
+    "nodemailer": "^6.7.2"
+  }
+}
